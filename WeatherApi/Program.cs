@@ -13,12 +13,6 @@ builder.Services.AddHttpClient<IWeatherClient, WeatherApiClient>(client =>
 
 var app = builder.Build();
 
-// Get config items
-IConfiguration configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json")
-    .Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
