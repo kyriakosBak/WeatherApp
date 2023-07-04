@@ -7,13 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<IWeatherClient, WeatherApiClient>(client =>
-{
-    client.BaseAddress = new Uri("http://api.weatherapi.com/v1/");
-});
+    client.BaseAddress = new Uri("http://api.weatherapi.com/v1/"));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -22,10 +19,8 @@ if (app.Environment.IsDevelopment())
 
 app.MapGet("/", () => "Weather app entry point.");
 
-app.MapGet("/realTime/{location}", async (string location, IWeatherClient weatherClient) =>
-{
-    return await weatherClient.GetRealTimeWeather(location);
-});
+app.MapGet("/realTime/{location}", async (string location, IWeatherClient weatherClient)
+    => await weatherClient.GetRealTimeWeather(location));
 
 // Redirects http requests to https
 app.UseHttpsRedirection();
